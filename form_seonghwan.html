@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart ASCII Art</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: monospace;
+            margin: 0;
+        }
+        pre {
+            font-size: 20px;
+            color: #ff1744;
+            white-space: pre;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff1744;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d50000;
+        }
+        .buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <pre id="heart"></pre>
+    <div class="buttons">
+        <button id="addLine">하트 한 줄 추가</button>
+        <button id="reset">초기화</button>
+    </div>
+    <script>
+        const heartLines = [
+            "     ******       ******",
+            "   **********   **********",
+            " ************* *************",
+            "*****************************",
+            "*****************************",
+            " ***************************",
+            "  *************************",
+            "    *********************",
+            "      *****************",
+            "        *************",
+            "          *********",
+            "            *****",
+            "              *"
+        ];
+        let currentLine = 0;
+        const heartElement = document.getElementById('heart');
+        const button = document.getElementById('addLine');
+        const resetButton = document.getElementById('reset');
+
+        button.addEventListener('click', () => {
+            if (currentLine < heartLines.length) {
+                heartElement.textContent += heartLines[currentLine] + '\n';
+                currentLine++;
+            } else {
+                button.disabled = true;
+                button.textContent = '완성!';
+            }
+        });
+
+        resetButton.addEventListener('click', () => {
+            heartElement.textContent = '';
+            currentLine = 0;
+            button.disabled = false;
+            button.textContent = '하트 한 줄 추가';
+        });
+    </script>
+</body>
+</html>
